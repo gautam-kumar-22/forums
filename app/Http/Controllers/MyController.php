@@ -23,7 +23,7 @@ class MyController extends Controller
         $isi['menu'] = 'menu.v_menu_admin';
         $isi['content'] = 'auth.register';
         $isi['title'] =$obj->title;
-        return view('web.form_one',$isi);
+        return view('web.form_six',$isi);
     }
 
 
