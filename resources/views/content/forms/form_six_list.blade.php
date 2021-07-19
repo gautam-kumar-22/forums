@@ -11,11 +11,10 @@
                             <thead class="font-weight-bold text-center">
                                 <tr>
                                     <th>No.</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Phone Number</th>
+                                    <th>Full Name</th>
+                                    <th>Receipt Name</th>
                                     <th>Email</th>
-                                    <th>Company Name</th>
+                                    <th>Gender</th>
                                     <th style="width:90px;">Action</th>
                                 </tr>
                             </thead>
@@ -56,12 +55,10 @@
 </div>
 
 
+
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-@include('content.forms.detail.more_details_one')
-
-
-
+@include('content.forms.detail.more_details_six')
 <script>
 var dataTable;
 var template = Handlebars.compile($("#details-template").html());
@@ -102,24 +99,20 @@ var template = Handlebars.compile($("#details-template").html());
                     name:'id'
                 },
                 {
-                    data: 'first_name',
-                    name: 'first_name'
+                    data: 'name',
+                    name: 'name'
                 },
                 {
-                    data: 'last_name',
-                    name: 'last_name'
-                },
-                {
-                    data: 'phone_number',
-                    name: 'phone_number'
+                    data: 'receipt_name',
+                    name: 'receipt_name'
                 },
                 {
                     data: 'email',
                     name: 'email'
                 },
                 {
-                    data: 'company_name',
-                    name: 'company_name'
+                    data: 'gender',
+                    name: 'gender'
                 },
 
                 {
@@ -139,14 +132,12 @@ var template = Handlebars.compile($("#details-template").html());
         });
 
         // statusing
-
         $(document).on('click','.more-details',function(){
 
 var data_row = table.row($(this).closest('tr')).data();
 $('#myModalHorizontal .modal-body').html(template(data_row));
 $('#myModalHorizontal ').modal('show');
 });
-
 
     });
 </script>

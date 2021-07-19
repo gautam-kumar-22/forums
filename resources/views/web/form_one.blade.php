@@ -102,7 +102,7 @@ input {
 
 
 </style>
-
+<title>{{ $title }}</title>
 </head>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -193,7 +193,7 @@ input {
 
 
                   <div class="form-group">
-                      <input type="checkbox" class="form-control" id="iknow_checkbox" name="iknow_checkbox" value="{{old('company_name','')}}" tabindex="5">
+                      <input type="checkbox" class="form-control" id="iknow_checkbox" name="iknow_checkbox" value="1" @if(old('iknow_checkbox')) checked="checked" @endif tabindex="5">
                       <label class="form-label" id="nameLabel" for="iknow_checkbox">I know what I want and I’m ready to order!
 (Select this option if you already have all the details of your bulk order) </label>
                   </div>
@@ -286,7 +286,7 @@ input {
                       </div>
                        <div class="form-group">
                         <textarea class="form-control" name="personalize_gift_other_idea" rows="5" id="personalize_gift_other_idea"></textarea>
-                      </div> 
+                      </div>
                     </div>
                     <div class="form-group">
                       <label class="form-label" id="company_name" for="company_name">(5) Next steps</label>
@@ -299,7 +299,7 @@ input {
                     </div>
                   </div>
                   <div class="form-group">
-                      <input type="checkbox" class="form-control" id="iamnotsure" name="iamnotsure" value="{{old('iamnotsure','')}}" tabindex="5">
+                      <input type="checkbox" class="form-control" id="iamnotsure" name="iamnotsure" value="1" @if(old('iamnotsure')) checked="checked" @endif tabindex="5">
                       <label class="form-label" id="nameLabel" for="iamnotsure">I’m not quite sure yet
 (Select this option if your looking to place a bulk order, but you’d like to talk with an Expert Designer about some ideas)</label>
                   </div>
@@ -387,8 +387,6 @@ input {
                     </div>
                   </div>
 
-
-
                   <div class="text-center margin-top-25">
                       <button type="submit" class="btn btn-mod btn-border btn-large">Submit</button>
                   </div>
@@ -413,6 +411,16 @@ input {
       $("#iamnotsure").click(function(){
         $(".iamnotsure").toggle();
       });
+
+      var iknw="{{old('iknow_checkbox')}}";
+      if(iknw==1){
+        $(".iknow_checkbox").toggle();
+      }
+
+       var idknw="{{old('iamnotsure')}}";
+       if(idknw==1){
+        $(".iamnotsure").toggle();
+      }
     });
 
 

@@ -56,11 +56,12 @@
 </div>
 
 
+
+
+
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-@include('content.forms.detail.more_details_one')
-
-
+@include('content.forms.detail.more_details_four')
 
 <script>
 var dataTable;
@@ -118,8 +119,8 @@ var template = Handlebars.compile($("#details-template").html());
                     name: 'email'
                 },
                 {
-                    data: 'company_name',
-                    name: 'company_name'
+                    data: 'company',
+                    name: 'company'
                 },
 
                 {
@@ -139,14 +140,12 @@ var template = Handlebars.compile($("#details-template").html());
         });
 
         // statusing
-
         $(document).on('click','.more-details',function(){
 
 var data_row = table.row($(this).closest('tr')).data();
 $('#myModalHorizontal .modal-body').html(template(data_row));
 $('#myModalHorizontal ').modal('show');
 });
-
 
     });
 </script>

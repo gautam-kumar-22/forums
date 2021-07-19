@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use App\Models\FormOne;
+use App\Models\FormTwo;
+use App\Models\FormThree;
+use App\Models\FormFour;
+use App\Models\FormFive;
+use App\Models\FormSix;
 use DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +29,7 @@ class FormController extends Controller
      */
     public function index(Request $request)
     {
+
          $data = [
             'count_user' => '5',
             'menu'       => 'menu.v_menu_admin',
@@ -38,7 +44,6 @@ class FormController extends Controller
                     ->addColumn('action', function($row){
                         $url=route('form-list',$row->id);
                         $btn = '<div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="btn btn-sm btn-icon btn-outline-success btn-circle mr-2 edit editUser"><i class=" fi-rr-edit"></i></div>';
-                        // $btn = $btn.' <div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-sm btn-icon btn-outline-danger btn-circle mr-2 deleteUser"><i class="fi-rr-trash"></i></div>';
                         $btn = $btn.'<a href="'.$url.'"><div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="view" class="btn btn-sm btn-icon btn-outline-info btn-circle mr-2"><i class="ki ki-bold-menu"></i></div></a> ';
 
                          return $btn;
@@ -49,7 +54,6 @@ class FormController extends Controller
                         }else{
                             return "Active";
                         }
-                        // return date('d M, Y',strtotime($row->created_at));
                     })
 
                     ->editColumn('count', function($row) {
@@ -58,12 +62,10 @@ class FormController extends Controller
                         }else{
                             return "Active";
                         }
-                        // return date('d M, Y',strtotime($row->created_at));
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        //dd($data);
         return view('layouts.v_template',$data);
     }
 
@@ -157,24 +159,72 @@ class FormController extends Controller
 
     public function getFormOneList(Request $request,$id){
 
-
         $Obj=Form::find($id);
-        // dd($Obj);
-        $data = [
-            'count_user' => '',
-            'menu'       => 'menu.v_menu_admin',
-            'content'    => 'content.forms.form_one_list',
-            'title'    => $Obj->title,
-            'id'        => $Obj->id
-        ];
+        $content='';
+            switch ($id) {
+                case "1":
+                    $content = "content.forms.form_one_list";
+                    break;
+                case "2":
+                    $content = "content.forms.form_two_list";
+                    break;
+                case "3":
+                    $content = "content.forms.form_three_list";
+                    break;
+                case "4":
+                    $content = "content.forms.form_four_list";
+                    break;
+                case "5":
+                    $content = "content.forms.form_five_list";
+                    break;
+                case "6":
+                    $content = "content.forms.form_six_list";
+                    break;
+                default:
+                    echo "Your favorite color is neither red, blue, nor green!";
+                }
+
+                $data = [
+                    'count_user' => '',
+                    'menu'       => 'menu.v_menu_admin',
+                    'content'    => $content,
+                    'title'    => $Obj->title,
+                    'id'        => $Obj->id
+                ];
+
 
         if ($request->ajax()) {
-            $q_user = FormOne::select('*')->orderByDesc('created_at');
+
+            switch ($id) {
+                case "1":
+                    $q_user = FormOne::select('*')->orderByDesc('created_at');
+                    break;
+                case "2":
+                    $q_user = FormTwo::select('*')->orderByDesc('created_at');
+                    break;
+                case "3":
+                    $q_user = FormThree::select('*')->orderByDesc('created_at');
+                    break;
+                case "4":
+                    $q_user = FormFour::select('*')->orderByDesc('created_at');
+                    break;
+                case "5":
+                    $q_user = FormFive::select('*')->orderByDesc('created_at');
+                    break;
+                case "6":
+                    $q_user = FormSix::select('*')->orderByDesc('created_at');
+                    break;
+                default:
+                    echo "Your favorite color is neither red, blue, nor green!";
+                }
+
+
+
             return Datatables::of($q_user)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="btn btn-sm btn-icon btn-outline-success btn-circle mr-2 edit editUser"><i class=" fi-rr-edit"></i></div>';
-                        // $btn = $btn.' <div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-sm btn-icon btn-outline-danger btn-circle mr-2 deleteUser"><i class="fi-rr-trash"></i></div>';
+                        $url=route('form-list',$row->id);
+                        $btn ='<a href="javascript:;"><div data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="view" class="btn btn-sm btn-icon btn-outline-info btn-circle mr-2 more-details"><i class="ki ki-bold-menu"></i></div></a> ';
 
                          return $btn;
                     })
@@ -182,7 +232,6 @@ class FormController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        //dd($data);
         return view('layouts.v_template',$data);
 
 
@@ -190,20 +239,9 @@ class FormController extends Controller
 
 
     public function formonedetail(Request $request, $id){
-        // $Obj=FormOne::find($id);
-        // $data = [
-        //     'count_user' => '',
-        //     'menu'       => 'menu.v_menu_admin',
-        //     'content'    => 'content.forms.form_one_list',
-        //     'title'    => $Obj->title,
-        //     'id'        => $Obj->id
-        // ];
-        // $q_user = FormOne::select('*')->orderByDesc('created_at');
-        // return view('layouts.f_details')->with($data);
-        // dd($q_user);
+
 
         $data = DB::table('form_one')->select('*')->where('id', $id)->get();
-        // // dd($data);
         $data=array('menu'=>'menu.v_menu_admin','data'=>$data);
         return view('layouts.f_details',$data);
     }

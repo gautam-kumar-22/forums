@@ -52,3 +52,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/larger-order-form', [MyController::class, 'index'])->name('form-one');
 Route::post('form-one-store',[MyController::class, 'formOnesubmit'])->name('form.one.store');
 
+
+Route::get('/box-ship-order-form', [MyController::class, 'indexFormTwo'])->name('form-two');
+Route::post('form-two-store',[MyController::class, 'formTwosubmit'])->name('form.two.store');
+
+
+Route::get('/real-estate-program-sign', [MyController::class, 'indexFormThree'])->name('form-three');
+Route::post('form-three-store',[MyController::class, 'formThreesubmit'])->name('form.three.store');
+
+
+Route::get('/carporate-gift-program', [MyController::class, 'indexFormFour'])->name('form-four');
+Route::post('form-four-store',[MyController::class, 'formFoursubmit'])->name('form.four.store');
+
+Route::get('/realtor-program', [MyController::class, 'indexFormFive'])->name('form-five');
+Route::post('form-five-store',[MyController::class, 'formFivesubmit'])->name('form.five.store');
+
+Route::get('/gift-reminder', [MyController::class, 'indexFormSix'])->name('form-six');
+Route::post('form-six-store',[MyController::class, 'formSixsubmit'])->name('form.six.store');

@@ -11,18 +11,16 @@
                             <thead class="font-weight-bold text-center">
                                 <tr>
                                     <th>No.</th>
+                                    <!-- <th>Product</th> -->
                                     <th>First Name</th>
                                     <th>Last Name</th>
-                                    <th>Phone Number</th>
                                     <th>Email</th>
-                                    <th>Company Name</th>
+                                    <th>Country Name</th>
                                     <th style="width:90px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-
                             <tr>
-
                             </tr>
 
                             </tbody>
@@ -58,15 +56,15 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-@include('content.forms.detail.more_details_one')
-
-
+@include('content.forms.detail.more_details_two')
 
 <script>
 var dataTable;
 var template = Handlebars.compile($("#details-template").html());
+
+
+
     $('document').ready(function () {
-        // success alert
         function swal_success() {
             Swal.fire({
                 position: 'top-end',
@@ -76,7 +74,6 @@ var template = Handlebars.compile($("#details-template").html());
                 timer: 1000
             })
         }
-        // error alert
         function swal_error() {
             Swal.fire({
                 position: 'centered',
@@ -85,6 +82,7 @@ var template = Handlebars.compile($("#details-template").html());
                 showConfirmButton: true,
             })
         }
+
         // table serverside
         var table = $('#tableUser').DataTable({
             processing: false,
@@ -102,24 +100,20 @@ var template = Handlebars.compile($("#details-template").html());
                     name:'id'
                 },
                 {
-                    data: 'first_name',
-                    name: 'first_name'
+                    data: 'bill_first_name',
+                    name: 'bill_first_name'
                 },
                 {
-                    data: 'last_name',
-                    name: 'last_name'
+                    data: 'bill_last_name',
+                    name: 'bill_last_name'
                 },
                 {
-                    data: 'phone_number',
-                    name: 'phone_number'
+                    data: 'bill_email',
+                    name: 'bill_email'
                 },
                 {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'company_name',
-                    name: 'company_name'
+                    data: 'bill_county_name',
+                    name: 'bill_county_name'
                 },
 
                 {
@@ -142,12 +136,13 @@ var template = Handlebars.compile($("#details-template").html());
 
         $(document).on('click','.more-details',function(){
 
-var data_row = table.row($(this).closest('tr')).data();
-$('#myModalHorizontal .modal-body').html(template(data_row));
-$('#myModalHorizontal ').modal('show');
-});
+                var data_row = table.row($(this).closest('tr')).data();
+                $('#myModalHorizontal .modal-body').html(template(data_row));
+                $('#myModalHorizontal ').modal('show');
+            });
 
 
     });
+
 </script>
 @endpush
